@@ -27,11 +27,12 @@ export default function App() {
         {
           loggedIn === 0 ? (
               <form onSubmit={(e) => handleSubmit(e)}>
-                <p>Username: </p>
+                <label>Username: </label>
                 <input required type="text" placeholder="username" onChange={(e) => {
                   setInputs({...inputs, username: e.target.value})
                 }}/>
-                <p>Password: </p>
+                <br/>
+                <label>Password: </label>
                 <input required type="password" placeholder="password" onChange={(e) => {
                   setInputs({...inputs, password: e.target.value})
                 }}/>
@@ -42,11 +43,12 @@ export default function App() {
           ) : loggedIn === 2 ? (
               <form onSubmit={(e) => handleSubmit(e)}>
                 <p>Invalid username or password</p>
-                <p>Username: </p>
+                <label>Username: </label>
                 <input required type="text" placeholder="username" onChange={(e) => {
                   setInputs({...inputs, username: e.target.value})
                 }}/>
-                <p>Password: </p>
+                <br/>
+                <label>Password: </label>
                 <input required type="password" placeholder="password" onChange={(e) => {
                   setInputs({...inputs, password: e.target.value})
                 }}/>
