@@ -1,25 +1,64 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
 
-function App() {
+export default function App() {
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  })
+
+  const [loggedIn, setLoggedIn] = useState(0);
+
+  let handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputs.password.length > 0 && inputs.username.length > 0) {
+      if (inputs.username === 'user' && inputs.password === 'password') {
+        setLoggedIn(1);
+      } else {
+        setLoggedIn(2);
+      }
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <h1>Login Page</h1>
+        {
+          loggedIn === 0 ? (
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <p>Username: </p>
+                <input required type="text" placeholder="username" onChange={(e) => {
+                  setInputs({...inputs, username: e.target.value})
+                }}/>
+                <p>Password: </p>
+                <input required type="password" placeholder="password" onChange={(e) => {
+                  setInputs({...inputs, password: e.target.value})
+                }}/>
+                <br/>
+                <br/>
+                <button type="submit">Submit</button>
+              </form>
+          ) : loggedIn === 2 ? (
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <p>Invalid username or password</p>
+                <p>Username: </p>
+                <input required type="text" placeholder="username" onChange={(e) => {
+                  setInputs({...inputs, username: e.target.value})
+                }}/>
+                <p>Password: </p>
+                <input required type="password" placeholder="password" onChange={(e) => {
+                  setInputs({...inputs, password: e.target.value})
+                }}/>
+                <br/>
+                <br/>
+                <button type="submit">Submit</button>
+              </form>
+
+          ) : loggedIn === 1 ? (
+              <p>Welcome, user!</p>
+          ) : (null)
+        }
+      </div>
   );
 }
-
-export default App;
